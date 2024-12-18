@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Product</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Upload New Product</h2>
+
+        {% if message %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="product_name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="product_desc" class="form-label">Product Description</label>
+                <textarea class="form-control" id="product_desc" name="product_desc" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="product_price" class="form-label">Product Price (in KES)</label>
+                <input type="number" class="form-control" id="product_price" name="product_price" required>
+            </div>
+            <div class="mb-3">
+                <label for="product_category" class="form-label">Product Category</label>
+                <input type="text" class="form-control" id="product_category" name="product_category" required>
+            </div>
+            <div class="mb-3">
+                <label for="product_image" class="form-label">Product Image</label>
+                <input type="file" class="form-control" id="product_image" name="product_image" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload Product</button>
+        </form>
+    </div>
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

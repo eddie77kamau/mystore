@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product[1] }} - Product Details</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Include navbar -->
+        {% include 'navbar.html' %}
+    
+        <section class="row mt-4">
+            <!-- Product Image -->
+            <div class="col-md-4 p-2">
+                <img src="../static/images/{{ product[4] }}" alt="{{ product[1] }}" class="w-100">
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-8 p-2">
+                <!-- Product Title -->
+                <h3 class="text-warning">{{ product[1] }}</h3>
+                <p>{{ product[2] }}</p>
+                <b class="text-danger">Product Category: {{ product[3] }}</b><br><br>
+                <b class="text-success">Product Price: Ksh. {{ product[2] }}</b><br><br>
+
+                <!-- Check if the user is logged in -->
+                {% if session.get('key') %}
+                    <!-- User is logged in -->
+                    <form action="{{ url_for('add_to_cart', product_id=product[0]) }}" method="POST">
+                        <!-- Quantity input -->
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" name="quantity" min="1" value="1" class="form-control mb-3" required>
+
+                        <!-- Add to Cart button -->
+                        <input type="submit" value="Add to Cart" class="btn btn-info">
+                    </form>
+                {% else %}
+                    <!-- User is not logged in -->
+                    <h4 class="text-warning">Please sign in to add items to your cart</h4>
+                    <a href="{{ url_for('login') }}" class="btn btn-dark">Login</a>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Back to Homepage -->
+        <a href="/index" class="d-block text-center mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="orange" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+            </svg>
+            <p>Back to Homepage</p>
+        </a>
+    </div>
+</body>
+</html>

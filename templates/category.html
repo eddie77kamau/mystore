@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category }} Products</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style>
+        /* Fix the layout and overlay positioning */
+        .box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .slide-img {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Set a fixed height */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-img img {
+            width: 100;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the box without distortion */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .slide-img:hover .overlay {
+            opacity: 1;
+        }
+
+        .buy-btn {
+            background-color: #ffcc00;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+/* Ensure the carousel item takes up 50% of the width (for two items at once) */
+.carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-item {
+    flex: 0 0 50%; /* Each item takes up 50% of the container's width (2 items per row) */
+    height: 350px;  /* Set a fixed height */
+    position: relative;
+    
+}
+
+/* Optional: Adjust the height of the images for consistency */
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images cover the area without distortion */
+    
+}
+
+/* Adjust the overlay for better display when showing multiple items */
+.carousel-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-item:hover .overlay {
+    opacity: 1;
+}
+
+/* Styling for the Buy Now button */
+.buy-btn {
+    background-color: #ffcc00;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
+
+    </style>
+</head>
+<body>
+    {% include'marquee.html' %}
+    <div class="container">
+        <h3 class="bg-warning mt-3 p-2 text-center text-light">{{ category }}</h3>
+        <section class="row">
+            {% if products %}
+                {% for product in products %}
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="slide-img">
+                            <!-- Image for each product -->
+                            <img src="../static/images/{{ product[4] }}" alt="{{ product[1] }}" />
+                            <!-- Overlay Buy Now button -->
+                            <div class="overlay">
+                                <a href="/single/{{ product[0] }}" class="buy-btn">Buy Now</a>
+                            </div>
+                        </div>
+
+                        <div class="detail-box text-center">
+                            <!-- Product name and price -->
+                            <h5>{{ product[1] }}</h5> 
+                            <b class="text-warning">Ksh.{{ product[2] }}</b>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No products available in this category at the moment.</p>
+            {% endif %}
+        </section>
+    
+    </div>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+
+    <!-- similar products carousel  -->
+
+    <!-- <div id="similarProductsCarousel" class="carousel slide mt-5" style="max-width: 600px; margin: 0 auto;" data-bs-ride="carousel">
+        <h4 class="text-center">You May Also Like</h4>
+        <div class="carousel-inner">
+            {% for product in similar_products %}
+                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                    <div class="box"> -->
+                        <!-- Image for each product -->
+                        <!-- <img src="../static/images/{{ product[4] }}" class="d-block w-100" alt="{{ product[1] }}" style="height: 350px; object-fit: cover;"> -->
+    
+                        <!-- Overlay with Buy Now button -->
+                        <!-- <div class="overlay">
+                            <a href="/single/{{ product[0] }}" class="buy-btn">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+     -->
+        <!-- Carousel controls -->
+         <!-- <button class="carousel-control-prev" type="button" data-bs-target="#similarProductsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#similarProductsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>  -->
+    
+    <!-- Similar Products Carousel -->
+<div id="similarProductsCarousel" class="carousel slide mt-5" style="max-width: 80%; margin: 0 auto;" data-bs-ride="carousel">
+    <h4 class="text-center">You May Also Like</h4>
+    <div class="carousel-inner">
+        {% for product_chunk in similar_products|batch(3, fill_with=None) %}
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                <div class="row justify-content-center gx-4 gy-3">
+                    {% for product in product_chunk %}
+                        {% if product %}
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="box text-center p-3">
+                                    <!-- Image for each product -->
+                                    <img src="../static/images/{{ product[4] }}" 
+                                         class="img-fluid rounded" 
+                                         alt="{{ product[1] }}" 
+                                         style="height: 200px; object-fit: cover; width: 100%; border-radius: 10px;">
+
+                                    <!-- Product Title -->
+                                    <p class="mt-2 font-weight-bold">{{ product[1] }}</p>
+
+                                    <!-- Buy Now Button -->
+                                    <div class="mt-2">
+                                        <a href="/single/{{ product[0] }}" class="btn btn-primary btn-sm">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Carousel controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#similarProductsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#similarProductsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+ <!-- back to homepage  -->
+      <a href="/index" class="d-block text-center mt-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="orange" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+        </svg>
+        <p>Back to Homepage</p>
+    </a> 
+
+</body>
+</html>

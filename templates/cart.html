@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- insert navbar.html using jinja2 templates  -->
+    {% include 'navbar.html'%}
+    <div class="container mt-5">
+        <h2>Items in Cart</h2>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>
+                        <img src="../static/images/{{ item['image'] }}" alt="{{ item['name'] }}" width="50">
+                        {{ item['name'] }}
+                    </td>
+                    <td>
+                        <form action="{{ url_for('add_to_cart', product_id=item['id']) }}" method="POST" class="d-inline">
+                            <!-- Decrement Button -->
+                            <button type="submit" name="quantity" value="-1" class="btn btn-secondary btn-sm" {% if item['quantity'] <= 1 %}disabled{% endif %}>-</button>
+                            <!-- Current Quantity (Display Only) -->
+                            <input type="number" value="{{ item['quantity'] }}" min="1" class="form-control d-inline w-50 mb-2" readonly>
+                            <!-- Increment Button -->
+                            <button type="submit" name="quantity" value="1" class="btn btn-secondary btn-sm">+</button>
+                        </form>
+                    </td>
+                    <td>Ksh.{{ item['price'] }}</td>
+                    <td>Ksh.{{ item['price'] * item['quantity'] }}</td>
+                    <td>
+                        <a href="{{ url_for('remove_from_cart', product_id=item['id']) }}" class="btn btn-danger btn-sm">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-right mt-3">
+            <h4>Total: Ksh.{{ total_amount }}</h4>
+            <!-- Trigger modal on button click -->
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Pay Via Mpesa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Payment Form inside the Modal -->
+                    <form action="/mpesa" method="POST">
+                        <input type="hidden" name="amount" value="{{ total_amount }}"> <!-- Use total_amount dynamically from backend -->
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter phone number e.g., 254xxxxxx" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-info w-100">Pay Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Cards</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style>
+        a{
+            text-decoration: none;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- First Row -->
+        <div class="row">
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='dairy') }}">
+                    <img src="static/images/dairy.jpg" class="card-img-top" alt="dairy"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='dairy') }}">
+                        Dairy</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='diapers') }}">
+                    <img src="static/images/diapers.jpg" class="card-img-top" alt="diapers"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='diapers') }}">
+                        Diapers</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='diapers') }}">
+                    <img src="static/images/coffee.jpg" class="card-img-top" alt="coffee"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='diapers') }}">
+                        Coffee, Cocoa & Tea</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='oil') }}">
+                    <img src="static/images/cooking oil.jpg" class="card-img-top" alt="cooking oil"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='oil') }}">
+                        Cooking Oil</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="row">
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='noodles') }}">
+                    <img src="static/images/noodles.png" class="card-img-top" alt="noodles"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='noodles') }}">
+                        Noodles & Spaghetti</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='personal') }}">
+                    <img src="static/images/personal.webp" class="card-img-top" alt="personal care"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='personal') }}">
+                        Personal Care</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='cereals') }}">
+                    <img src="static/images/cereals.jpg" class="card-img-top" alt="cereals"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='cereals') }}">
+                        Cereals</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='sugar') }}">
+                    <img src="static/images/sugar.jpeg" class="card-img-top" alt="sugar"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='sugar') }}">
+                        Sugar</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Row -->
+        <div class="row">
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='sweets') }}">
+                    <img src="static/images/sweets.webp" class="card-img-top" alt="sweets"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='sweets') }}">
+                        Sweets</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='snacks') }}">
+                    <img src="static/images/snacks.jpg" class="card-img-top" alt="snacks"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='snacks') }}">
+                        Snacks</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='stationery') }}">
+                    <img src="static/images/stationery.jpg" class="card-img-top" alt="stationery"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='stationery') }}">
+                        Stationery</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='welness') }}">
+                    <img src="static/images/wellness.jpg" class="card-img-top" alt="wellness"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='wellness') }}">
+                        Wellness</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fourth Row -->
+        <div class="row">
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='wheat') }}">
+                    <img src="static/images/wheat.jpeg" class="card-img-top" alt="wheat"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='wheat') }}">
+                        Wheat Flour</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='spreads') }}">
+                    <img src="static/images/spreads.png" class="card-img-top" alt="spreads"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='spreads') }}">
+                        Spreads</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='beverages') }}">
+                    <img src="static/images/beverages.jpg" class="card-img-top" alt="beverages"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='beverages') }}">
+                        Beverages</a>
+                </div>
+            </div>
+            <div class="card col-md-3 mb-4">
+                <a href="{{ url_for('category_page', category_name='kitchen') }}">
+                    <img src="static/images/kitchen.jpg" class="card-img-top" alt="kitchen essentials"></a>
+                <div class="card-body">
+                    <a href="{{ url_for('category_page', category_name='kitchen') }}">
+                        Kitchen Essentials</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
