@@ -505,16 +505,20 @@ from mpesa import *
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-db_config = {
-    "host": os.getenv("DB_HOST"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "database": os.getenv("DB_NAME"),
-    "port": int(os.getenv("DB_PORT", 3306)),
-}
 
-# Establish database connection
-connection = pymysql.connect(**db_config)
+
+def get_db_connection():
+    global db_connection
+    if db_connection is None or not db_connection.open:
+        db_connection = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            database=os.getenv("DB_NAME"),
+            port=int(os.getenv("DB_PORT", 3306))
+        )
+    return db_connection
+db_connection = None
 
 
 # Global connection object
