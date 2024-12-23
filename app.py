@@ -9,7 +9,7 @@ app.secret_key = 'your_secret_key'
 @app.route("/index")
 def index():
     # Establish a connection to DB 
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango', port=3306)
     
     # Define SQL queries
     categories = ['snacks', 'vegetables', 'maizeflour', 'dairy', 'coookingoil', 'sugar', 'sweets', 'stationery', 'personalcare', 'ceraels', 'laundry']
@@ -35,7 +35,7 @@ def login():
         role = request.form['role']
 
         # Establishing a database connection
-        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango', port=3306)
         cursor = connection.cursor()
 
         # Retrieve user from database
@@ -83,7 +83,7 @@ def signup():
 
         # Establish a database connection
         try:
-            connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+            connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
             cursor = connection.cursor()
 
             # Check if the email already exists
@@ -126,7 +126,7 @@ def admin_dashboard():
 @app.route('/category/<category_name>')
 def category_page(category_name):
     # Establish database connection
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
 
     # Fetch products based on the category passed in the URL
@@ -147,7 +147,7 @@ def category_page(category_name):
 @app.route('/single/<int:product_id>')
 def single(product_id):
     # Establish a new connection to the database
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
 
     # Query the product from the database by ID
@@ -170,7 +170,7 @@ def search():
     query = request.args.get('query')
 
     # Establish a database connection
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
 
     # Search the database for products that match the query
@@ -234,7 +234,7 @@ def upload():
         product_image.save('static/images/' + product_image.filename)
 
         # Connect to the database
-        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
         cursor = connection.cursor()
 
         # SQL query for inserting product data
@@ -259,7 +259,7 @@ def upload():
 
 @app.route("/manageproducts")
 def manage_products():
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
 
     cursor.execute("SELECT * FROM products")
@@ -272,7 +272,7 @@ def manage_products():
 # Route to edit a product (GET and POST)
 @app.route("/edit_product/<int:product_id>", methods=['GET', 'POST'])
 def edit_product(product_id):
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
 
     if request.method == 'POST':
@@ -298,7 +298,7 @@ def edit_product(product_id):
 # Route to delete a product
 @app.route("/delete_product/<int:product_id>")
 def delete_product(product_id):
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango', port=3306)
     cursor = connection.cursor()
 
     cursor.execute("DELETE FROM products WHERE id=%s", (product_id,))
@@ -311,7 +311,7 @@ def delete_product(product_id):
 @app.route("/manageusers", methods=['GET', 'POST'])
 def manage_users():
     
-        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
         cursor = connection.cursor()
 
         # If the request method is POST, that means the form was submitted to add a user
@@ -340,7 +340,7 @@ def manage_users():
 
 @app.route("/edituser/<int:user_id>", methods=['GET', 'POST'])
 def edit_user(user_id):
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
 
     cursor.execute("UPDATE FROM users WHERE id=%s", (user_id,))
@@ -351,7 +351,7 @@ def edit_user(user_id):
 
 @app.route("/deleteuser/<int:user_id>", methods=['POST'])
 def delete_user(user_id):
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
 
     cursor.execute("DELETE FROM users WHERE id=%s", (user_id,))
@@ -370,7 +370,7 @@ def inject_cart_count():
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
     # Fetch product details (e.g., from the database) based on product_id
-    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+    connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM products WHERE id = %s", (product_id,))
     product = cursor.fetchone()
@@ -441,7 +441,7 @@ def site_analytics():
 
     try:
         # Establish a connection to DB
-        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango')
+        connection = pymysql.connect(host=' sql108.infinityfree.com ', user='if0_37944761', password='fbFPlpvpCVVnr', database='if0_37944761_guango',  port=3306)
         cursor = connection.cursor()
 
         # Total Users
