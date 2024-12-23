@@ -492,9 +492,17 @@ def logout():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True, port=3306)
+# if __name__ == '__main__':
+#     app.run(debug=True, port=3306)
 
+import os
+
+if __name__ == '__main__':
+    # Get the PORT environment variable, default to 10000 if not set
+    port = int(os.environ.get('PORT', 10000))
+
+    # Bind the app to 0.0.0.0 to make it accessible externally
+    app.run(debug=True, host='0.0.0.0', port=port)
 
 
 
